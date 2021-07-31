@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
         }
 
         switch(c) {
-            case '?':
+        case '?':
             printf("Ingrese \"-i entrada.pmm\" o \"--input entrada.pmm\" para seleccionar el archivo \"entrada.ppm\" como archivo de origen.\
             \nIngrese \"-o salida.pmm\" o \"--output salida.pmm\" para seleccionar el archivo \"salida.ppm\" como archivo de salida.\
             \nIngrese \"-n\" o \"--negative\" para obtener el negativo de la imagen.\
@@ -54,8 +54,62 @@ int main(int argc, char **argv) {
             
             exit(0);
             break;
+
+        case 'i':
+            if (!source_file_path) {
+                    if (optarg && strcmp(optarg, "") && optarg[0] != '-') { 
+                        source_file_path = optarg;
+                    } else {
+                        fprintf(stderr, "Falta el nombre del archivo de entrada\n");
+                        exit(66);
+                    }
+                } else {
+                    fprintf(stderr, "Argumento extra\n");
+                    exit(67);
+                }
+            break;        
+        case 'o':
+            if (!output_file_path) {
+                    if (optarg && strcmp(optarg, "") && optarg[0] != '-') { 
+                        output_file_path = optarg;
+                    } else {
+                        fprintf(stderr, "Falta el nombre del archivo de salida\n");
+                        exit(68);
+                    }
+                } else {
+                    fprintf(stderr, "Argumento extra\n");
+                    exit(67);
+                }
+            break; 
+
         }
     }
+
+    /* arg validation */
+    if (source_file_path == NULL) {
+		fprintf(stderr, "Falta el nombre del archivo de entrada\n");
+        exit(66);
+	}
     
+    source_file = fopen(source_file_path, "rb" );
+    if(source_file == NULL) {
+        fprintf(stderr, "No se puede abrir el archivo de entrada\n");
+        exit(69);
+    }
+
+    if (output_file_path == NULL) {
+		fprintf(stderr, "Falta el nombre del archivo de salida\n");
+        exit(68);
+	}
+
+    output_file = fopen(output_file_path, "wb");
+    if (output_file == NULL) {
+		fprintf(stderr, "No se pudo abrir el archivo de salida\n");
+		exit(70);
+	}
+
+    printf("El archivo de entrada es %s\n", source_file_path);
+    printf("El archivo de salida es %s\n", output_file_path);
+
     return 0;
 }
