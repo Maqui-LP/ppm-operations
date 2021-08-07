@@ -1,15 +1,34 @@
 #include "ppm.h"
 
-/*
 t_ppm ppm_operation_rotate90(t_ppm p){
+  unsigned int row,col; 
+  t_ppm new = ppm_create(p.width, p.height, p.depth);
+  for(row=0; row < p.width; row++) for(col=0; col < p.height ; col++){
+    new.pixels[row][col] = p.pixels[col][row];
+  }
+  return new;
 }
 
 t_ppm ppm_operation_flip_horizontal(t_ppm p){
+  unsigned int row,col; 
+  t_ppm new = ppm_create(p.height, p.width, p.depth);
+  for(row=0; row < p.height; row++) for(col=0; col < p.width ; col++){
+    new.pixels[row][col] = p.pixels[row][p.width-col-1];
+  }
+  return new;
 }
 
 t_ppm ppm_operation_flip_vertical(t_ppm p){
+  unsigned int row,col; 
+  t_ppm new = ppm_create(p.height, p.width, p.depth);
+  for(row=0; row < p.height; row++) for(col=0; col < p.width ; col++){
+    new.pixels[row][col] = p.pixels[p.height-row-1][col];
+  }
+
+  return new;
 }
 
+/*
 t_ppm ppm_operation_blur(t_ppm p, unsigned char ratio){
 }
 */
