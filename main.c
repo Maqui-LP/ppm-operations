@@ -99,18 +99,24 @@ int main(int argc, char **argv) {
             break; 
         case 'n':
             op_ppm = ppm_operation_negative(op_ppm);
+            
             break;
-        /*
+
         case 'r':
-            r = true;
+            op_ppm = ppm_operation_rotate90(op_ppm);
+
             break;
+
         case 'v':
-            v = true;
+            op_ppm = ppm_operation_flip_vertical(op_ppm);
+
             break;
+
         case 'h':
-            h = true;
+            op_ppm = ppm_operation_flip_horizontal(op_ppm);
+
             break;
-        */
+
         case 'b':
             if (optarg && strcmp(optarg, "") && (optarg[0] != '-') && atoi(optarg) > 0) {
 				blur_value = atoi(optarg);
