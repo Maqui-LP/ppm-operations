@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     FILE *output_file = NULL;
 
     /* Input and operations images*/
-    t_ppm op_ppm;
+    t_ppm op_ppm, tmp;
 
     /* Verifying amount of arguments */
     if (argc == 2 && (strcmp(argv[1], "-?")==0 || strcmp(argv[1], "--help")==0)) {
@@ -79,32 +79,42 @@ int main(int argc, char **argv) {
                     if (optarg && strcmp(optarg, "") && optarg[0] != '-') { 
                         output_file_path = optarg;
                         if ((output_file = fopen(output_file_path, "wb")) == NULL) {
+                            ppm_free(op_ppm);
                             error(1, errno, "An error ocurred opening output file\n");
 	                    }
                     } else {
+                        ppm_free(op_ppm);
                         error(1, 0, "Missing argument <output_file>\n");
                     }
                 } else {
+                    ppm_free(op_ppm);
                     error(1, 0, "Extra argument\n");
                 }
             break; 
         case 'n':
-            op_ppm = ppm_operation_negative(op_ppm);
+            tmp = ppm_operation_negative(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
             
             break;
 
         case 'r':
-            op_ppm = ppm_operation_rotate90(op_ppm);
-
+            tmp = ppm_operation_rotate90(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
             break;
 
         case 'v':
-            op_ppm = ppm_operation_flip_vertical(op_ppm);
+            tmp = ppm_operation_flip_vertical(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
 
             break;
 
         case 'h':
-            op_ppm = ppm_operation_flip_horizontal(op_ppm);
+            tmp = ppm_operation_flip_horizontal(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
 
             break;
 
@@ -113,13 +123,17 @@ int main(int argc, char **argv) {
                 if(optarg[0] != '-' && is_number(optarg)){
                     blur_ratio = atoi(optarg);
                 } else if ( is_number(optarg+1)) {
+                    ppm_free(op_ppm);
                     error(1,0, "Blur ratio must be a positive number");
                 } else {
+                    ppm_free(op_ppm);
                     error(1,0, "Missing argument blur ratio");
                 }
             }
             if (blur_ratio != -1) {
-                op_ppm = ppm_operation_blur(op_ppm, blur_ratio);
+                tmp = ppm_operation_blur(op_ppm, blur_ratio);
+                ppm_free(op_ppm);
+                op_ppm = tmp;
 		    }
             break;
         }
