@@ -7,13 +7,14 @@
 #include <stdbool.h>
 #include "ppm.h"
 #include "ppm-operations.h"
+#include "util.h"
 
 extern int errno;
 int main(int argc, char **argv) {
     /* Opt args variables */
     int c;
     int option_index;
-    int blur_value = -1;
+    int blur_ratio = -1;
 
     /* Input and output files config */
     char *source_file_path = NULL;
@@ -27,8 +28,7 @@ int main(int argc, char **argv) {
 
     /* Verifying amount of arguments */
     if (argc == 2 && (strcmp(argv[1], "-?")==0 || strcmp(argv[1], "--help")==0)) {
-        printf("Aca va a estar la funcion de ayuda");
-        exit(0);
+        print_help();
     }
 
     if(argc < 5) error(1, 0, "You must provide at least -i <source_file> and -o <output_file> options");
@@ -70,17 +70,8 @@ int main(int argc, char **argv) {
 
         switch(c) {
         case '?':
-            /* Escribir todo esto en ingles */
-            printf("Ingrese \"-i entrada.pmm\" o \"--input entrada.pmm\" para seleccionar el archivo \"entrada.ppm\" como archivo de origen.\
-            \nIngrese \"-o salida.pmm\" o \"--output salida.pmm\" para seleccionar el archivo \"salida.ppm\" como archivo de salida.\
-            \nIngrese \"-n\" o \"--negative\" para obtener el negativo de la imagen.\
-            \nIngrese \"-r\" o \"--rotate\" para rotar la imagen 90 grados.\
-            \nIngrese \"-h\" o \"--horizontal\" para espejar la imagen horizontalmente.\
-            \nIngrese \"-v\" o \"--vertical\" para espejar la imagen verticalmente.\
-            \nIngrese \"-b NUM\" o \"--blur NUM\" para desenfocar la imagen con radio NUM.\
-            \nIngrese \"-?\" o \"--help\" para visualizar el menu de ayuda.\n");
+            print_help();
             
-            exit(0);
             break;
 
         case 'o':
@@ -118,17 +109,21 @@ int main(int argc, char **argv) {
             break;
 
         case 'b':
-            if (optarg && strcmp(optarg, "") && (optarg[0] != '-') && atoi(optarg) > 0) {
-				blur_value = atoi(optarg);
-			}
-			else if (atoi(optarg) <= 0) {
-				fprintf(stderr, "El valor debe ser un numero positivo mayor a 0\n");
-				exit(73);
-			}
-			break;
+            if (optarg && strcmp(optarg, "")) {
+                if(optarg[0] != '-' && is_number(optarg)){
+                    blur_ratio = atoi(optarg);
+                } else if ( is_number(optarg+1)) {
+                    error(1,0, "Blur ratio must be a positive number");
+                } else {
+                    error(1,0, "Missing argument blur ratio");
+                }
+            }
+            if (blur_ratio != -1) {
+                op_ppm = ppm_operation_blur(op_ppm, blur_ratio);
+		    }
+            break;
         }
     }
-    
     
     ppm_save(op_ppm, output_file);
 
