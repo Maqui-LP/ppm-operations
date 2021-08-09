@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     FILE *output_file = NULL;
 
     /* Input and operations images*/
-    t_ppm i_ppm, op_ppm;
+    t_ppm op_ppm;
 
     /* Verifying amount of arguments */
     if (argc == 2 && (strcmp(argv[1], "-?")==0 || strcmp(argv[1], "--help")==0)) {
@@ -46,8 +46,8 @@ int main(int argc, char **argv) {
     if ((source_file = fopen(source_file_path, "rb")) == NULL) {
         error(1, errno, "An error ocurred opening source file\n");
     }
-    i_ppm = ppm_from_file(source_file);
-    op_ppm = i_ppm;
+    op_ppm = ppm_from_file(source_file);
+    fclose(source_file);
     while(1) {
         option_index = 0;
 
@@ -126,6 +126,9 @@ int main(int argc, char **argv) {
     }
     
     ppm_save(op_ppm, output_file);
+    ppm_free(op_ppm);
+
+    fclose(output_file);
 
     return 0;
 }
