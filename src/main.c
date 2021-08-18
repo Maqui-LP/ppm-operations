@@ -20,7 +20,6 @@ int main(int argc, char **argv) {
     char *source_file_path = NULL;
 	char *output_file_path = NULL;
 	FILE *source_file = NULL;
-    FILE *operations_file = NULL;
     FILE *output_file = NULL;
 
     /* Input and operations images*/
