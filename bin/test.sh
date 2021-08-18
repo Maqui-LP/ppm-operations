@@ -3,9 +3,6 @@
 # Change to repo's top level directory
 cd $(dirname "$0")/..
 
-gcc *.c -o main.exe
-chmod +x main.exe
-
 assert() {
     echo "Running ./main.exe -i ./samples/model.ppm -o ./hidden/$2.ppm $3"
     ./main.exe -i ./samples/model.ppm -o ./hidden/$2.ppm $3

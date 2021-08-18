@@ -1,3 +1,5 @@
 hidden/
 *.out
 *.exe
+bin/ppm
+build/
