@@ -1,4 +1,14 @@
-# Trabajo Final de Seminario de Lenguajes C
+<div align="center">
+<h3>Trabajo Final de Seminario de Lenguajes C</h3>
+<h1>PPM Operations</h1>
+</div>
+
+<div align="center">
+
+[![Build and Test Status][workflowbadge]][workflowurl]
+[![License: MIT][licensebadge]][licenseurl]
+
+</div>
 
 Este programa es un gestor de imágenes en formato [PPM de tipo P6](http://netpbm.sourceforge.net/doc/ppm.html).
 Para poder operar con estas imágenes se implementó una versión simplificada y
@@ -66,3 +76,9 @@ $ make test
 ```
 
 Este comando también puede ser ejecutado localmente
+
+
+[workflowbadge]: https://github.com/Maqui-LP/ppm-operations/actions/workflows/ci.yml/badge.svg
+[licensebadge]: https://img.shields.io/badge/License-MIT-blue.svg
+[workflowurl]: https://github.com/Maqui-LP/ppm-operations/commits/main
+[licenseurl]: https://github.com/Maqui-LP/ppm-operations/blob/main/LICENSE
