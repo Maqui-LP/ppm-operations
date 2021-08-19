@@ -5,8 +5,8 @@ cd "$(dirname "$0")/.." || exit
 
 assert() {
     echo "Running ./bin/ppm -i ./samples/model.ppm -o ./hidden/$2.ppm $3"
-    ./bin/ppm -i ./samples/model.ppm -o ./hidden/"$2".ppm "$3"
-    if diff ./samples/"$1".ppm ./hidden/"$2".ppm >/dev/null; then
+    ./bin/ppm -i ./samples/model.ppm -o ./hidden/"$2".ppm $3
+    if ! diff -q ./samples/"$1".ppm ./hidden/"$2".ppm &>/dev/null; then
         echo "Test failed for flag $3"
         exit 1
     fi

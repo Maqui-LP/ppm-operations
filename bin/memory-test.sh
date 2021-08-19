@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.." || exit
 assert() {
     echo "Running valgrind check for ./bin/ppm -i ./samples/model.ppm $2"
     valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s --error-exitcode=3 \
-        ./bin/ppm -i ./samples/model.ppm "$2"
+        ./bin/ppm -i ./samples/model.ppm $2
     if [[ $? -eq 3 ]]; then
         echo "Memory leak found"
         exit 1
