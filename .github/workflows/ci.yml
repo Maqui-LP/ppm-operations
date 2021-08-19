@@ -18,11 +18,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Update APT package lists
-        run: apt-get update
+        run: sudo apt-get update
       - name: Install Valgrind
-        run: apt-get --assume-yes install valgrind
+        run: sudo apt-get --assume-yes install valgrind
       - name: Buil App
         run: make
       - name: Run Memory Leak Test
         run: make valgrind
-        
