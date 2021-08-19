@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Build and Test Status][workflowbadge]][workflowurl]
+[![Build, Test and Memory Check Status][workflowbadge]][workflowurl]
 [![License: MIT][licensebadge]][licenseurl]
 
 </div>
@@ -73,13 +73,19 @@ El directorio `./samples` tiene ejemplos de PPMs
 
 ## Tests
 
-Para validar que el programa funciona correctamente, se cuenta con GitHub Actions que ejecutan tests de la siguiente forma:
+Para validar que el programa funciona correctamente, se cuenta con un GitHub Action que ejecutan tests de integración. Los mismos se pueden ejecutar localmente con el siguiente comando:
 
 ```sh
 $ make test
 ```
 
-Este comando también puede ser ejecutado localmente
+## Memory Check
+
+Para asegurar que el programa no cuenta con memory leaks, se cuenta con un Github Action que ejecuta pruebas de memoria utilizando Valgrind. Estas pruebas pueden ejecutarse localmente con el siguiente comando:
+
+```sh
+$ make valgrind
+```
 
 
 [workflowbadge]: https://github.com/Maqui-LP/ppm-operations/actions/workflows/ci.yml/badge.svg

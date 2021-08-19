@@ -15,6 +15,11 @@ assert() {
     echo
 }
 
+if ! type -p valgrind > /dev/null; then
+    echo "Valgrind is not installed on this system."
+    exit 1
+fi
+
 assert "modelCopy" "-o ./hidden/modelCopy2.ppm"
 assert "modelNegative" "-o ./hidden/modelNegative2.ppm -n"
 assert "modelRotated" "-o ./hidden/modelRotated2.ppm -r"

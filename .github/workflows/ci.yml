@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build, Tests and Memory Check
 
 on: [push, pull_request]
 
