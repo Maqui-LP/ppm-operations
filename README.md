@@ -36,16 +36,16 @@ $ ./bin/ppm --help
 Para realizar operaciones sobre las imagenes, el programa cuenta con los siguientes flags:
 
 - `-i entrada.ppm`: archivo origen. Opción requerida
-- `-o salida.ppm`: archivo salida. Opción requerida
-- `-n`: calcula el negativo
-- `-r`: rota a 90 grados
-- `-h`: espejo horizontal
-- `-v`: espejo vertical
-- `-s`: filtro sepia
-- `-g`: filtro escala de grises
-- `-w`: filtro blanco y negro
-- `-b NUM`: desenfoque con radio NUM
-- `-?`: ayuda del programa
+- `-o salida.ppm` o `--output salida.ppm`: archivo salida. Opción requerida
+- `-n` o `--negative`: calcula el negativo
+- `-r` o `--rotate`: rota a 90 grados
+- `-h` o `--horizontal`: espejo horizontal
+- `-v` o `--vertical`: espejo vertical
+- `-s` o `--sepia`: filtro sepia
+- `-g` o `--grayscale`: filtro escala de grises
+- `-w` o `--black-white`: filtro blanco y negro
+- `-b NUM` o `--blur NUM`: desenfoque con radio NUM
+- `-?` o `--help`: ayuda del programa
 
 ## Ejemplos de uso
 
