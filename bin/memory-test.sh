@@ -5,9 +5,9 @@ cd $(dirname "$0")/..
 
 assert() {
     echo "Running valgrind check for ./bin/ppm -i ./samples/model.ppm $2"
-    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s --error-exitcode=1 \
+    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s --error-exitcode=3 \
     ./bin/ppm -i ./samples/model.ppm $2
-    if [[ $? -ne 0 ]]; then 
+    if [[ $? -eq 3 ]]; then 
         echo "Memory leak found"
         exit 1
     fi
@@ -31,3 +31,5 @@ assert "modelBlackNWhite" "-o ./hidden/modelBlackNWhite3.ppm -wwwwww"
 assert "modelGrayscale" "-o ./hidden/modelGrayscale2.ppm -g"
 assert "modelSepia" "-o ./hidden/modelSepia2.ppm -s"
 assert "modelSepiaGray" "-o ./hidden/modelSepiaGray2.ppm -s -g"
+assert "modelCopy" "-b -1 -o ./hidden/modelCopy2.ppm"
+assert "modelCopy"
