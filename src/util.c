@@ -26,3 +26,9 @@ void print_help() {
 
     exit(0);
 }
+
+void safe_fclose(FILE* file_to_close) {
+    if (file_to_close != NULL) {
+        fclose(file_to_close);
+    }
+}

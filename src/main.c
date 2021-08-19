@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
         error(1, errno, "An error ocurred opening source file\n");
     }
     op_ppm = ppm_from_file(source_file);
-    fclose(source_file);
+    safe_fclose(source_file);
     while(1) {
         option_index = 0;
 
@@ -72,26 +72,30 @@ int main(int argc, char **argv) {
 
         switch(c) {
         case '?':
+            ppm_free(op_ppm);
+            safe_fclose(output_file);
             print_help();
             
             break;
 
         case 'o':
             if (!output_file_path) {
-                    if (optarg && strcmp(optarg, "") && optarg[0] != '-') { 
-                        output_file_path = optarg;
-                        if ((output_file = fopen(output_file_path, "wb")) == NULL) {
-                            ppm_free(op_ppm);
-                            error(1, errno, "An error ocurred opening output file\n");
-	                    }
-                    } else {
+                if (optarg && strcmp(optarg, "") && optarg[0] != '-') { 
+                    output_file_path = optarg;
+                    if ((output_file = fopen(output_file_path, "wb")) == NULL) {
                         ppm_free(op_ppm);
-                        error(1, 0, "Missing argument <output_file>\n");
+                        safe_fclose(output_file);
+                        error(1, errno, "An error ocurred opening output file\n");
                     }
                 } else {
                     ppm_free(op_ppm);
-                    error(1, 0, "Extra argument\n");
+                    error(1, 0, "Missing argument <output_file>\n");
                 }
+            } else {
+                ppm_free(op_ppm);
+                safe_fclose(output_file);
+                error(1, 0, "Extra argument\n");
+            }
             break; 
         case 'n':
             tmp = ppm_operation_negative(op_ppm);
@@ -147,9 +151,11 @@ int main(int argc, char **argv) {
                     blur_ratio = atoi(optarg);
                 } else if ( is_number(optarg+1)) {
                     ppm_free(op_ppm);
+                    safe_fclose(output_file);
                     error(1,0, "Blur ratio must be a positive number");
                 } else {
                     ppm_free(op_ppm);
+                    safe_fclose(output_file);
                     error(1,0, "Missing argument blur ratio");
                 }
             }
@@ -165,7 +171,7 @@ int main(int argc, char **argv) {
     ppm_save(op_ppm, output_file);
     ppm_free(op_ppm);
 
-    fclose(output_file);
+    safe_fclose(output_file);
 
     return 0;
 }
