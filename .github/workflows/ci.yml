@@ -11,4 +11,18 @@ jobs:
       - name: Build App
         run: make
       - name: Run Tests
-        run: make test 
+        run: make test
+  memory-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Update APT package lists
+        run: apt-get update
+      - name: Install Valgrind
+        run: apt-get --assume-yes install valgrind
+      - name: Buil App
+        run: make
+      - name: Run Memory Leak Test
+        run: make valgrind
+        

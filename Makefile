@@ -31,4 +31,6 @@ clean:
 test: all
 	$(BIN_DIR)/test.sh
 
+valgrind: all
+	$(BIN_DIR)/memory-test.sh
 
