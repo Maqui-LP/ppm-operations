@@ -58,10 +58,13 @@ int main(int argc, char **argv) {
             {"horizontal"   , no_argument	    , 0	,	'h'},
             {"vertical"   	, no_argument	    , 0	,	'v'},
             {"blur"   	    , required_argument , 0	,	'b'},
+            {"sepia"       	, no_argument	    , 0	,	's'},
+            {"grayscale"    , no_argument	    , 0	,	'g'},
+            {"black-white"    , no_argument	    , 0	,	'w'},
 		    {0				,        0          , 0 ,	 0 }
 		};
 
-        c = getopt_long_only(argc-2, argv+2, "?o:nrhvb:", long_options, &option_index);
+        c = getopt_long_only(argc-2, argv+2, "?o:nrhvsgwb:", long_options, &option_index);
 
         if(c == -1) {
             break;
@@ -112,6 +115,27 @@ int main(int argc, char **argv) {
 
         case 'h':
             tmp = ppm_operation_flip_horizontal(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
+
+            break;
+
+        case 's':
+            tmp = ppm_operation_sepia(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
+
+            break;
+        
+        case 'g':
+            tmp = ppm_operation_grayscale(op_ppm);
+            ppm_free(op_ppm);
+            op_ppm = tmp;
+
+            break;
+
+        case 'w':
+            tmp = ppm_operation_black_and_white(op_ppm);
             ppm_free(op_ppm);
             op_ppm = tmp;
 

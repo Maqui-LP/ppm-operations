@@ -41,6 +41,9 @@ Para realizar operaciones sobre las imagenes, el programa cuenta con los siguien
 * `-r`: rota a 90 grados
 * `-h`: espejo horizontal
 * `-v`: espejo vertical
+* `-s`: filtro sepia
+* `-g`: filtro escala de grises
+* `-w`: filtro blanco y negro
 * `-b NUM`: desenfoque con radio NUM
 * `-?`: ayuda del programa
 
