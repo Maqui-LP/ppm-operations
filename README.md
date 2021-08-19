@@ -14,7 +14,7 @@
 Este programa es un gestor de imágenes en formato [PPM de tipo P6](http://netpbm.sourceforge.net/doc/ppm.html).
 Para poder operar con estas imágenes se implementó una versión simplificada y
 básica de **ppm** que básicamente permite crear nuevas imágenes, leerlas desde
-el disco o guardarlas en el disco. 
+el disco o guardarlas en el disco.
 
 La implementación de ppm, puede verse en los archivos `src/ppm.c` y `include/ppm.h`. Para
 poder realizar operaciones sobre las imágenes, existe otra librería llamada
@@ -24,7 +24,7 @@ la imagen original.
 
 ## Quickstart
 
-Para compilar y ejecutar el programa: 
+Para compilar y ejecutar el programa:
 
 ```sh
 $ make
@@ -35,17 +35,17 @@ $ ./bin/ppm --help
 
 Para realizar operaciones sobre las imagenes, el programa cuenta con los siguientes flags:
 
-* `-i entrada.ppm`: archivo origen. Opción requerida
-* `-o salida.ppm`: archivo salida. Opción requerida
-* `-n`: calcula el negativo
-* `-r`: rota a 90 grados
-* `-h`: espejo horizontal
-* `-v`: espejo vertical
-* `-s`: filtro sepia
-* `-g`: filtro escala de grises
-* `-w`: filtro blanco y negro
-* `-b NUM`: desenfoque con radio NUM
-* `-?`: ayuda del programa
+- `-i entrada.ppm`: archivo origen. Opción requerida
+- `-o salida.ppm`: archivo salida. Opción requerida
+- `-n`: calcula el negativo
+- `-r`: rota a 90 grados
+- `-h`: espejo horizontal
+- `-v`: espejo vertical
+- `-s`: filtro sepia
+- `-g`: filtro escala de grises
+- `-w`: filtro blanco y negro
+- `-b NUM`: desenfoque con radio NUM
+- `-?`: ayuda del programa
 
 ## Ejemplos de uso
 
@@ -86,7 +86,6 @@ Para asegurar que el programa no cuenta con memory leaks, se cuenta con un Githu
 ```sh
 $ make valgrind
 ```
-
 
 [workflowbadge]: https://github.com/Maqui-LP/ppm-operations/actions/workflows/ci.yml/badge.svg
 [licensebadge]: https://img.shields.io/badge/License-MIT-blue.svg

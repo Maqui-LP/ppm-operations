@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Change to repo's top level directory
-cd $(dirname "$0")/..
+cd "$(dirname "$0")/.." || exit
 
 assert() {
     echo "Running valgrind check for ./bin/ppm -i ./samples/model.ppm $2"
     valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s --error-exitcode=3 \
-    ./bin/ppm -i ./samples/model.ppm $2
-    if [[ $? -eq 3 ]]; then 
+        ./bin/ppm -i ./samples/model.ppm "$2"
+    if [[ $? -eq 3 ]]; then
         echo "Memory leak found"
         exit 1
     fi
@@ -15,7 +15,7 @@ assert() {
     echo
 }
 
-if ! type -p valgrind > /dev/null; then
+if ! type -p valgrind >/dev/null; then
     echo "Valgrind is not installed on this system."
     exit 1
 fi

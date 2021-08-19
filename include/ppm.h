@@ -6,18 +6,20 @@
 #define PPM_TYPE "P6"
 
 /* RGB pixel */
-typedef struct {
+typedef struct
+{
   unsigned char red;
   unsigned char green;
   unsigned char blue;
 } t_ppm_pixel;
 
 /* A PPM type: has height, width, depth and pixels */
-typedef struct {
+typedef struct
+{
   unsigned int height;
   unsigned int width;
   unsigned short depth;
-  t_ppm_pixel * * pixels;
+  t_ppm_pixel **pixels;
 } t_ppm;
 
 /* initializes a new PPM of height * width pixels and depth. Its 
@@ -35,7 +37,8 @@ void ppm_save(t_ppm, FILE *);
 void ppm_print_header(t_ppm p);
 
 /* This function must be called after destroying a PPM object.
- * It frees all memory allocated for pixels \
+ * It frees all memory allocated for pixels
  */
 void ppm_free(t_ppm p);
+
 #endif
