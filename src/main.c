@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
     if ((source_file = fopen(source_file_path, "rb")) == NULL)
     {
-        error(1, errno, "An error ocurred opening source file\n");
+        error(1, errno, "An error ocurred while opening source file\n");
     }
     op_ppm = ppm_from_file(source_file);
     safe_fclose(source_file);

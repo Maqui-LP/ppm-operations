@@ -27,6 +27,8 @@ la imagen original.
 Para compilar y ejecutar el programa:
 
 ```sh
+$ git clone https://github.com/Maqui-LP/ppm-operations.git
+$ cd ./ppm-operations
 $ make
 $ ./bin/ppm --help
 ```
