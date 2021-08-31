@@ -75,7 +75,7 @@ El directorio `./samples` tiene ejemplos de PPMs
 
 ## Tests
 
-Para validar que el programa funciona correctamente, se cuenta con un GitHub Action que ejecutan tests de integración. Los mismos se pueden ejecutar localmente con el siguiente comando:
+Para validar que el programa funciona correctamente, se cuenta con un GitHub Action que ejecuta tests de integración. Los mismos se pueden ejecutar localmente con el siguiente comando:
 
 ```sh
 $ make test
